@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+
+    <div class="container">
+        <h1 style="color: blue">
+          Create a lunch menu 
+        </h1>
+
+        <h2>
+            {{ note }}
+        </h2>
+
+        <form action="{% url 'new' %}" method="POST">
+              {% csrf_token %}
+              {% for field in cite_filled %}
+              <div class="form-group">
+
+                {{ field.label_tag }}
+                {% render_field field class="form-control" %}
+
+              </div>
+              {% endfor %}
+
+              <input type="submit" value="Crear cita">
+        </form>
+    <hr/>
+    <a href="{% url 'show' %}">Sus citas</a> 
+    <hr/>
+    <a href="{% url 'logout' %}">Cerrar sesión</a> 
+    </div>
