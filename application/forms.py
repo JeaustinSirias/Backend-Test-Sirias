@@ -9,11 +9,14 @@ class menuForm(forms.ModelForm):
         model = menu
         fields = '__all__'
         labels = {
-            'meal_one': 'First meal option',
-            'meal_two': 'Second meal option',
-            'meal_three': 'Third meal option',
-            'meal_four': 'Fourth meal option',  
+            'meal_one': 'Option 1',
+            'meal_two': 'Option 2',
+            'meal_three': 'Option 3',
+            'meal_four': 'Option 4',  
             'date': 'Date'        
+        }
+        help_texts = {
+            'date': 'Format MM/DD/YYYY',
         }
 
 class requestMealForm(forms.ModelForm):
@@ -22,10 +25,7 @@ class requestMealForm(forms.ModelForm):
 
     class Meta:
         model = employee
-        fields = [
-            'prefered_meal',
-            'custom_preference',
-        ]
+        fields = '__all__'
         labels = {
             'prefered_meal': 'Choose your preferred meal',
             'custom_preference': 'Any custom preference?',

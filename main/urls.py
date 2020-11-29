@@ -19,8 +19,11 @@ from application import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('new_menu/', views.create_menu, name='newMenu'),
-    path('main_page/', views.main_page, name='mainPage'),
-    path('appoint_meal/', views.appoint_meal, name='appointMeal'),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('new-menu/', views.create_menu, name='newMenu'),
+    path('main/', views.main_page, name='mainPage'),
+    path('appoint-meal/', views.appoint_meal, name='appointMeal'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('show-menu/', views.list_menu, name='list'),
+    path('edit-menu/<id>', views.edit_menu, name='edit'),
+    path('delete-menu/<id>', views.delete_menu, name='delete'),
 ]

@@ -4,7 +4,9 @@ from django.core.exceptions import ValidationError
 
 def validate_date(date):
     if date < localdate():
-        raise ValidationError('Date cannot be in the past')
+        raise ValidationError(
+            ('Date cannot be in the past'), code='invalid'
+        )
 
 class menu(models.Model):
     '''The menu model with its respective
@@ -17,7 +19,7 @@ class menu(models.Model):
         null=True, 
         blank=True, 
         default=None, 
-        validators=[validate_date]
+        validators=[validate_date],
     )
 
 class employee(models.Model):

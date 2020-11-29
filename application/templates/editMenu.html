@@ -1,0 +1,26 @@
+{% load widget_tweaks %}
+
+    <div class="container">
+        <h1 style="color: purple">
+          You are editing a menu
+        </h1>
+
+        <h2>{{ note }}</h2>
+
+        <form action="" method="POST">
+              {% csrf_token %}
+              {% for field in form %}
+                {% if field.label_tag != form.date.label_taga %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {% render_field field class="form-control" %}
+                    </div>
+                {% endif %}
+              {% endfor %}
+
+              <input type="submit" value="Save changes">
+        </form>
+    <hr/>
+    <a href="{% url 'list' %}">List of menus</a> 
+    <hr/>
+    </div>

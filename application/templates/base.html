@@ -23,7 +23,7 @@
       {% block sidebar %}
       <ul class="sidebar-nav">
           <li><a href="{% url 'newMenu'%}">Create menu</a></li>
-          <li><a href="">List of menus</a></li>
+          <li><a href="{% url 'list' %}">List of menus</a></li>
           <li><a href="">All authors</a></li>
           <li><a href="{% url 'logout' %}">logout</a></li>
       </ul>
