@@ -9,9 +9,9 @@
             {{ note }}
         </h2>
 
-        <form action="{% url 'newMenu' %}" method="POST">
+        <form action="{% url 'appointMeal' %}" method="POST">
               {% csrf_token %}
-              {% for field in menuform %}
+              {% for field in requestMealForm %}
               <div class="form-group">
 
                 {{ field.label_tag }}
@@ -20,7 +20,7 @@
               </div>
               {% endfor %}
 
-              <input type="submit" value="Crear menu">
+              <input type="submit" value="I'm hungry!">
         </form>
 
     </div>
