@@ -16,7 +16,7 @@ class menuForm(forms.ModelForm):
             'date': 'Date'        
         }
         help_texts = {
-            'date': 'Format MM/DD/YYYY',
+            'date': 'Format YYYY-MM-DD',
         }
 
 class requestMealForm(forms.ModelForm):

@@ -9,7 +9,7 @@ from django.utils import timezone
 
 #=======================================================
 def sudo_check(user):
-    '''A method to checkout if an user is
+    '''A method to checkout if an user 
     has superuser privileges
 
     :param user: the current authenticated user
@@ -71,14 +71,14 @@ def create_menu(request):
             'createMenu.html', 
             {
                 'menuform' : new_form,
-                'note': 'Hi there'
+                #'note': ''
             }
         )
 #=======================================================
 @login_required
 @user_passes_test(sudo_check)
 def main_page(request):
-    date = timezone.localdate()
+    date = timezone.now()
     return render(
         request, 
         'index.html', 
@@ -87,35 +87,59 @@ def main_page(request):
         }
     )
 #=======================================================
+@login_required
 def appoint_meal(request):
-    new_form = requestMealForm()
-    if request.method == 'POST':
-        filled_form = requestMealForm(request.POST)
-        if filled_form.is_valid():
-            filled_form.save()
-            note = (
-                'Your today\'s meal has been saved!'
+    '''A view to let employees to order
+    their today's preferred meal and customize it.
+
+    :param request: the request object callout
+    :return: the menu rendered HTML form
+    '''
+    # Check if today's menu is available
+    today = timezone.localdate()
+    #for item in menu.objects.all():
+    item = menu.objects.filter(date=today)
+    if today == item[0].date:
+        today = list(item)
+        new_form = requestMealForm()
+        if request.method == 'POST':
+            filled_form = requestMealForm(request.POST)
+            if filled_form.is_valid():
+                filled_form.save()
+                note = (
+                    'Your today\'s meal has been saved!'
+                )
+            else:
+                note = 'Are you missing something?'
+            return render(
+                request,
+                'requestMenu.html',
+                {
+                    'requestMealForm': new_form,
+                    'note': note,
+                    #'todays_menu': today,
+                }
             )
         else:
-            note = 'Are you missing something?'
-        return render(
-            request,
-            'appoint.html',
-            {
-                'requestMealForm': new_form,
-                'note': note,
-            }
-        )
-    else:
-        note = 'Do you already know what you wanna eat?'
-        return render(
-            request, 
-            'appoint.html',
-            {
-                'requestMealForm': new_form,
-                'note': note,     
-            }
-        )
+            note = 'Do you already know what you wanna eat?'
+            return render(
+                request, 
+                'requestMenu.html',
+                {
+                    'requestMealForm': new_form,
+                    'note': note,
+                    'todays_menu': today,     
+                }
+            )
+    note = 'Today\'s menu is still not ready'
+    return render(
+        request, 
+        'requestMenu.html',
+        {
+            #'requestMealForm': new_form,
+            'note': note,     
+        }
+    )
 #=======================================================
 @login_required
 @user_passes_test(sudo_check)

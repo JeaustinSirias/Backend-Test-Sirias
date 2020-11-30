@@ -22,8 +22,17 @@ class menu(models.Model):
         validators=[validate_date],
     )
 
+    def get_fields(self):
+        return [(item.name, item.value_to_string(self)) for item in menu]
+
 class employee(models.Model):
-    prefered_meal = models.CharField(max_length=255)
+    MENU = [
+        ('Option 1', 'Option 1'),
+        ('Option 2', 'Option 2'),
+        ('Option 3', 'Option 3'),
+        ('Option 4', 'Option 4'),
+    ]
+    prefered_meal = models.CharField(max_length=255, choices=MENU)
     custom_preference = models.CharField(max_length=255)
     #name = models.CharField(max_length=50)
     #phone = models.CharField(maxlength=10)
