@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
-from .models import menu
+from .models import menu, employee
 from .forms import menuForm, requestMealForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.utils import timezone
+from django.utils.timezone import localtime, localdate, now, timedelta
 
 #=======================================================
 def sudo_check(user):
     '''A method to checkout if an user 
-    has superuser privileges
+    has 'superuser' privileges
 
     :param user: the current authenticated user
     :return: boolean
@@ -23,10 +23,10 @@ def sudo_check(user):
 @login_required
 @user_passes_test(sudo_check)       
 def create_menu(request):
-    '''A view that offers a form to create a menu
+    '''A view that renders a form to create a menu
     for a specific date.
 
-    :param request: the request call
+    :param request: the request callout object
     :return: the rendered menu HTML form
     '''
     new_form = menuForm()
@@ -78,7 +78,12 @@ def create_menu(request):
 @login_required
 @user_passes_test(sudo_check)
 def main_page(request):
-    date = timezone.now()
+    '''The admin's (Nora) mainpage view.
+
+    :param request: the request callout object
+    :return: the homepage rendered HTML temp.
+    '''
+    date = localtime()
     return render(
         request, 
         'index.html', 
@@ -88,24 +93,39 @@ def main_page(request):
     )
 #=======================================================
 @login_required
-def appoint_meal(request):
+def request_menu(request):
     '''A view to let employees to order
     their today's preferred meal and customize it.
+    The form is available if Nora (or any other admin)
+    already has filled 'today's' menu and if the page
+    is visited before 11 AM CLT.
 
     :param request: the request object callout
     :return: the menu rendered HTML form
     '''
+    #Check if employee already requested once a day
+    '''
+    delta = now() - timedelta(days=1)
+    if employee.objects.filter(user=request.user, date=delta).exists():
+        return render(
+            request,
+            'requestMenu.html',
+            {
+                'note': 'You already requested your meal'
+            }
+        )
+    '''
     # Check if today's menu is available
-    today = timezone.localdate()
-    #for item in menu.objects.all():
+    today = localtime()
+    instant = localdate()
     item = menu.objects.filter(date=today)
-    if today == item[0].date:
-        today = list(item)
-        new_form = requestMealForm()
+    if today.hour < 22:
+        user = employee(user=request.user)
+        new_form = requestMealForm(instance=user)
         if request.method == 'POST':
-            filled_form = requestMealForm(request.POST)
-            if filled_form.is_valid():
-                filled_form.save()
+            form = requestMealForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
                 note = (
                     'Your today\'s meal has been saved!'
                 )
@@ -117,26 +137,25 @@ def appoint_meal(request):
                 {
                     'requestMealForm': new_form,
                     'note': note,
-                    #'todays_menu': today,
                 }
             )
         else:
-            note = 'Do you already know what you wanna eat?'
+            note = 'So what are you gonna eat?'
             return render(
                 request, 
                 'requestMenu.html',
                 {
                     'requestMealForm': new_form,
                     'note': note,
-                    'todays_menu': today,     
+                    'todays_menu': item,     
                 }
             )
-    note = 'Today\'s menu is still not ready'
+    note = 'Today\'s menu is not available'
     return render(
         request, 
         'requestMenu.html',
         {
-            #'requestMealForm': new_form,
+            'requestMealForm': None,
             'note': note,     
         }
     )
@@ -182,7 +201,6 @@ def edit_menu(request, id):
         )
         if form.is_valid():
             date = form.cleaned_data.get('date')
-            print(date)
             for item in menu.objects.all():
                 if date == item.date:
                     note = 'This date is already in use'
@@ -230,10 +248,27 @@ def delete_menu(request, id):
 
     :param request: the request object callout
     :param id: the object's primary key
-    :return: redirects
+    :return: redirects 
     '''
     form = menu.objects.get(id=id)
     form.delete()
     return redirect(to='list')
 #=======================================================
-
+@login_required
+@user_passes_test(sudo_check)
+def list_requests(request):
+    orders = {}
+    instant = localdate()
+    for item in employee.objects.filter(date=instant):
+        orders[item.pk] = {
+            'option': item.option,
+        }
+    return render(
+        request,
+        'listRequests.html',
+        {
+           'requests_list': orders,
+           'date': instant,
+        }
+    )
+#=======================================================

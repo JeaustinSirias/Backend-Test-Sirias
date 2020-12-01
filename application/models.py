@@ -1,11 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.timezone import localdate
 from django.core.exceptions import ValidationError
 
+#=====================================================
 def validate_date(date):
     if date < localdate():
         raise ValidationError(
-            ('Date cannot be in the past'), code='invalid'
+            ('Wrong'), code='invalid'
         )
 
 class menu(models.Model):
@@ -22,9 +24,6 @@ class menu(models.Model):
         validators=[validate_date],
     )
 
-    def get_fields(self):
-        return [(item.name, item.value_to_string(self)) for item in menu]
-
 class employee(models.Model):
     MENU = [
         ('Option 1', 'Option 1'),
@@ -32,10 +31,11 @@ class employee(models.Model):
         ('Option 3', 'Option 3'),
         ('Option 4', 'Option 4'),
     ]
-    prefered_meal = models.CharField(max_length=255, choices=MENU)
-    custom_preference = models.CharField(max_length=255)
-    #name = models.CharField(max_length=50)
-    #phone = models.CharField(maxlength=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    option = models.CharField(max_length=255, choices=MENU)
+    preference = models.CharField(max_length=40)
+    date = models.DateField(default=localdate, editable=False)
+
 
 
 

@@ -1,10 +1,9 @@
 from django import forms
 from .models import menu, employee
 
-
+#=====================================================
 class menuForm(forms.ModelForm):
     '''The form for the menu model'''
-
     class Meta:
         model = menu
         fields = '__all__'
@@ -18,15 +17,16 @@ class menuForm(forms.ModelForm):
         help_texts = {
             'date': 'Format YYYY-MM-DD',
         }
-
+#=====================================================
 class requestMealForm(forms.ModelForm):
     '''The form for employees to fill their 
     preferred day's meal'''
-
     class Meta:
         model = employee
         fields = '__all__'
+        exclude = {'user'}
         labels = {
-            'prefered_meal': 'Choose your preferred meal',
-            'custom_preference': 'Any custom preference?',
+            'option': 'Choose your preferred meal',
+            'preference': 'Any custom preference?',
         }
+#=====================================================

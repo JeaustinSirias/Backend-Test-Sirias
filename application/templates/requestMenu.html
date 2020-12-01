@@ -32,16 +32,17 @@
 
     <form action="{% url 'appointMeal' %}" method="POST">
           {% csrf_token %}
-          {% for field in requestMealForm %}
-          <div class="form-group">
+          {% if requestMealForm != None%}
+            {% for field in requestMealForm %}
+            <div class="form-group">
 
-            {{ field.label_tag }}
-            {% render_field field class="form-control" %}
+              {{ field.label_tag }}
+              {% render_field field class="form-control" %}
 
-          </div>
-          {% endfor %}
-
-          <input type="submit" value="I'm hungry!">
+            </div>
+            {% endfor %}
+            <input type="submit" value="I'm hungry!">
+          {% endif %}
     </form>
 
 </div>

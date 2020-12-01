@@ -1,3 +1,4 @@
+
 {% load widget_tweaks %}
 <head>
 
@@ -13,26 +14,17 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <div class="container">
-    <h1 style="color: purple">
-    You are editing a menu
+    <h1>
+        List of meal requests for today {{date}}
     </h1>
-
-    <h2>{{ note }}</h2>
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            {% if field.label_tag != form.date.label_taga %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {% render_field field class="form-control" %}
-                </div>
-            {% endif %}
+        {% for pk, item in requests_list.items %}
+        <h3>
+            There is a request for menu's {{item.option}} from user: 
+            <a href="">See details</a>
+        </h3>
         {% endfor %}
 
-        <input type="submit" value="Save changes">
-    </form>
-<hr/>
-<a href="{% url 'list' %}">List of menus</a> 
-<hr/>
+        <hr/>
+        <a href="{% url 'mainPage' %}">Back</a>  
+        <hr/>           
 </div>
