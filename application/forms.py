@@ -1,5 +1,5 @@
 from django import forms
-from .models import menu, employee
+from .models import menu, lunch
 
 #=====================================================
 class menuForm(forms.ModelForm):
@@ -22,7 +22,7 @@ class lunchForm(forms.ModelForm):
     '''The form for employees to fill their 
     preferred day's meal'''
     class Meta:
-        model = employee
+        model = lunch
         fields = '__all__'
         exclude = {'user'}
         labels = {

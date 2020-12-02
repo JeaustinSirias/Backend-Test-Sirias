@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import localdate
 from django.core.exceptions import ValidationError
-
 #=====================================================
 def validate_date(date):
     if date < localdate():
@@ -17,14 +16,9 @@ class menu(models.Model):
     meal_two = models.CharField(max_length=255)
     meal_three = models.CharField(max_length=255)
     meal_four = models.CharField(max_length=255)
-    date = models.DateField(
-        null=True, 
-        blank=True, 
-        default=None, 
-        validators=[validate_date],
-    )
+    date = models.DateField(validators=[validate_date])
 
-class employee(models.Model):
+class lunch(models.Model):
     MENU = [
         ('Option 1', 'Option 1'),
         ('Option 2', 'Option 2'),
@@ -33,7 +27,7 @@ class employee(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     option = models.CharField(max_length=255, choices=MENU)
-    preference = models.CharField(max_length=40)
+    preference = models.CharField(max_length=40, blank=True, null=True)
     date = models.DateField(default=localdate, editable=False)
 
 

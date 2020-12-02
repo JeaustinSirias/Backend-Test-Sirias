@@ -1,4 +1,3 @@
-
 {% load widget_tweaks %}
 <head>
 
@@ -12,19 +11,19 @@
     <!-- Add additional CSS in static file -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
+</head>
 <div class="container">
-    <h1>
-        List of luch requests for today {{date}}
+    <h1 style="color: blue">
+      Showing details for lunch request number: {{pk}}
     </h1>
-        {% for pk, item in requests_list.items %}
-        <h3>
-            There is a request for menu's {{item.option}} from employee: {{user}}
-            <a href="{% url 'details' pk %}">See details</a>
-        </h3>
-        {% endfor %}
-
-        <hr/>
-        <a href="{% url 'mainPage' %}">Back</a>  
-        <hr/>           
+    {% for field in lunch %}
+      <ul>
+       <li>Menu option: {{ field.option }}</li>
+       <li>Preferences: {{ field.preference }}</li>
+       <li>Employee: {{ field.user.username }}</li>
+      </ul>
+    {% endfor %}
+    <hr/>
+    <a href="{% url 'requests' %}">Back</a> 
+    <hr/>
 </div>

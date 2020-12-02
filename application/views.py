@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import menu, employee
+from .models import menu, lunch
 from .forms import menuForm, lunchForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import login, authenticate
@@ -26,24 +26,23 @@ def create_menu(request):
     for a specific date.
 
     :param request: the request callout object
-    :return: the rendered menu HTML form
+    :return: the rendered HTML menu form
     '''
     new_form = menuForm()
     if request.method == 'POST':
         form = menuForm(request.POST)
         if form.is_valid():
             date = form.cleaned_data.get('date')
-            for instant in menu.objects.all():
-                if date == instant.date:
-                    note = 'This date is already in use'
-                    return render(
-                        request,
-                        'createMenu.html',
-                        {
-                            'menuform':form,
-                            'note':note
-                        }
-                    )  
+            if menu.objects.filter(date=date).exists():
+                note = 'This date is already in use'
+                return render(
+                    request,
+                    'createMenu.html',
+                    {
+                        'menuform':form,
+                        'note':note
+                    }
+                )  
             form.save()
             note = 'A new menu has been created'
             return render(
@@ -103,9 +102,8 @@ def request_lunch(request):
     :return: the menu rendered HTML form
     '''
     #Check if employee already requested once a day
-    note = 'Today\'s menu is not available'
     date = localdate()
-    if employee.objects.filter(user=request.user, date=date).exists():
+    if lunch.objects.filter(user=request.user, date=date).exists():
         return render(
             request,
             'requestMenu.html',
@@ -116,7 +114,7 @@ def request_lunch(request):
     # Check if today's menu is available
     item = menu.objects.filter(date=date)
     if item.exists() and localtime().hour < 22:
-        user = employee(user=request.user)
+        user = lunch(user=request.user)
         new_form = lunchForm()
         if request.method == 'POST':
             form = lunchForm(request.POST, instance=user)
@@ -178,39 +176,26 @@ def edit_menu(request, id):
     :param id: the primary key of the menu to modify
     :return: the rendered menu HTML update form
     '''
+    # Fill the form with current data
     note = ''
-    primary_key = menu.objects.get(id=id)
-    edit_form = menuForm(instance=primary_key)
+    pk = menu.objects.get(id=id)
+    edit_form = menuForm(instance=pk)
     if request.method == 'POST':
-        form = menuForm(
-            data=request.POST, 
-            instance=primary_key
-        )
+        form = menuForm(request.POST, instance=pk)
         if form.is_valid():
-            date = form.cleaned_data.get('date')
-            for item in menu.objects.all():
-                if date == item.date:
-                    note = 'This date is already in use'
-                    return render(
-                        request,
-                        'editMenu.html',
-                        {
-                            'form': form,
-                            'note': note,
-                        }
-                    )
-            note = 'The %s menu has been updated' %date    
+            note = 'The menu has been updated' 
             form.save()
             edit_form = form
             return render(
                 request, 
                 'editMenu.html', 
                 {
+                    'form': None,
                     'note': note,
                 }
             )
         else:
-            note = 'Invalid date format. Try again.'
+            note = 'Date cannot be in the past'
             return render(
                 request, 
                 'editMenu.html', 
@@ -244,11 +229,18 @@ def delete_menu(request, id):
 @login_required
 @user_passes_test(sudo_check)
 def list_requests(request):
+    '''A view that renders the list of requested
+    lunches for 'today'.
+    
+    :param request: the request callout object
+    :return: the rendered HTML list of requests
+    '''
     orders = {}
     instant = localdate()
-    for item in employee.objects.filter(date=instant):
+    for item in lunch.objects.filter(date=instant):
         orders[item.pk] = {
             'option': item.option,
+            'user': item.user.username,
         }
     return render(
         request,
@@ -256,6 +248,38 @@ def list_requests(request):
         {
            'requests_list': orders,
            'date': instant,
+        }
+    )
+#=======================================================
+def check_details(request, id):
+    '''A view dedicated to show the details
+    of the requested lunch for a specific employee.
+
+    :param request: the request callout object
+    :param id: the id of the luch 
+    :return: the rendered HTML list of details
+    '''
+    item = lunch.objects.filter(id=id)
+    return render(
+        request,
+        'checkDetails.html',
+        {
+            'lunch': item,
+            'pk': id,
+        }
+    )
+#=======================================================
+def show_menu(request):
+    '''The main view for employees
+
+    '''
+    date = localdate()
+    Menu = menu.objects.filter(date=date)
+    return render(
+        request,
+        'showMenu.html',
+        {
+            'lunch': Menu,
         }
     )
 #=======================================================

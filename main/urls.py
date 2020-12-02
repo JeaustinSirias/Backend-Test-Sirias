@@ -27,4 +27,6 @@ urlpatterns = [
     path('edit-menu/<id>', views.edit_menu, name='edit'),
     path('delete-menu/<id>', views.delete_menu, name='delete'),
     path('requests/', views.list_requests, name='requests'),
+    path('details/<id>', views.check_details, name='details'),
+    path('menu/', views.show_menu, name='menu'),
 ]
