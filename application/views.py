@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import menu, employee
-from .forms import menuForm, requestMealForm
+from .forms import menuForm, lunchForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.utils.timezone import localtime, localdate, now, timedelta
-
+from django.utils.timezone import localtime, localdate
 #=======================================================
 def sudo_check(user):
     '''A method to checkout if an user 
@@ -31,9 +30,9 @@ def create_menu(request):
     '''
     new_form = menuForm()
     if request.method == 'POST':
-        filled_form = menuForm(request.POST)
-        if filled_form.is_valid():
-            date = filled_form.cleaned_data.get('date')
+        form = menuForm(request.POST)
+        if form.is_valid():
+            date = form.cleaned_data.get('date')
             for instant in menu.objects.all():
                 if date == instant.date:
                     note = 'This date is already in use'
@@ -41,11 +40,11 @@ def create_menu(request):
                         request,
                         'createMenu.html',
                         {
-                            'menuform':filled_form,
+                            'menuform':form,
                             'note':note
                         }
                     )  
-            filled_form.save()
+            form.save()
             note = 'A new menu has been created'
             return render(
                 request,
@@ -61,7 +60,7 @@ def create_menu(request):
                 request,
                 'createMenu.html',
                 {
-                    'menuform': filled_form,
+                    'menuform': form,
                     'note': note,
                 }
             )  
@@ -93,7 +92,7 @@ def main_page(request):
     )
 #=======================================================
 @login_required
-def request_menu(request):
+def request_lunch(request):
     '''A view to let employees to order
     their today's preferred meal and customize it.
     The form is available if Nora (or any other admin)
@@ -104,41 +103,28 @@ def request_menu(request):
     :return: the menu rendered HTML form
     '''
     #Check if employee already requested once a day
-    '''
-    delta = now() - timedelta(days=1)
-    if employee.objects.filter(user=request.user, date=delta).exists():
+    note = 'Today\'s menu is not available'
+    date = localdate()
+    if employee.objects.filter(user=request.user, date=date).exists():
         return render(
             request,
             'requestMenu.html',
             {
-                'note': 'You already requested your meal'
+                'note': 'We\'re preparing your meal!'
             }
         )
-    '''
     # Check if today's menu is available
-    today = localtime()
-    instant = localdate()
-    item = menu.objects.filter(date=today)
-    if today.hour < 22:
+    item = menu.objects.filter(date=date)
+    if item.exists() and localtime().hour < 22:
         user = employee(user=request.user)
-        new_form = requestMealForm(instance=user)
+        new_form = lunchForm()
         if request.method == 'POST':
-            form = requestMealForm(request.POST, request.FILES)
+            form = lunchForm(request.POST, instance=user)
             if form.is_valid():
                 form.save()
                 note = (
                     'Your today\'s meal has been saved!'
                 )
-            else:
-                note = 'Are you missing something?'
-            return render(
-                request,
-                'requestMenu.html',
-                {
-                    'requestMealForm': new_form,
-                    'note': note,
-                }
-            )
         else:
             note = 'So what are you gonna eat?'
             return render(
@@ -150,7 +136,8 @@ def request_menu(request):
                     'todays_menu': item,     
                 }
             )
-    note = 'Today\'s menu is not available'
+    else:
+        note = 'Today\'s menu is not available'
     return render(
         request, 
         'requestMenu.html',

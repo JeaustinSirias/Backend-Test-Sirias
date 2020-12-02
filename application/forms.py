@@ -18,7 +18,7 @@ class menuForm(forms.ModelForm):
             'date': 'Format YYYY-MM-DD',
         }
 #=====================================================
-class requestMealForm(forms.ModelForm):
+class lunchForm(forms.ModelForm):
     '''The form for employees to fill their 
     preferred day's meal'''
     class Meta:
@@ -26,6 +26,7 @@ class requestMealForm(forms.ModelForm):
         fields = '__all__'
         exclude = {'user'}
         labels = {
+            'user': 'the user',
             'option': 'Choose your preferred meal',
             'preference': 'Any custom preference?',
         }
