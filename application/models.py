@@ -18,7 +18,7 @@ class menu(models.Model):
     uuid = models.UUIDField(default=spawn_uuid, editable=False)
 #=====================================================
 class lunch(models.Model):
-    '''The lunch model'''
+    '''The lunch model for employees'''
 
     MENU = [
         ('Option 1', 'Option 1'),

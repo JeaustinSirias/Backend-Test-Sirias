@@ -7,5 +7,4 @@ celery==5.0.2
 slack-client==0.3.0
 slackclient==2.9.3
 redis==3.5.3
-redis-server==6.0.9
 

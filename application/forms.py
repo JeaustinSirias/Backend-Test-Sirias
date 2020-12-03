@@ -1,6 +1,5 @@
 from django import forms
 from .models import menu, lunch
-
 #=====================================================
 class menuForm(forms.ModelForm):
     '''The form for the menu model'''

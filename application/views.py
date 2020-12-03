@@ -277,6 +277,9 @@ def check_details(request, id):
 def show_menu(request, uuid):
     '''The main view for employees
 
+    :param request: the request object callout
+    :param uuid: the UUID key for 'today'
+    :return: the rendered HTML menu
     '''
     date = localdate()
     Menu = menu.objects.filter(date=date)
