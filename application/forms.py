@@ -7,11 +7,12 @@ class menuForm(forms.ModelForm):
     class Meta:
         model = menu
         fields = '__all__'
+        exlude = {'uuid'}
         labels = {
-            'meal_one': 'Option 1',
-            'meal_two': 'Option 2',
-            'meal_three': 'Option 3',
-            'meal_four': 'Option 4',  
+            'optionOne': 'Option 1',
+            'optionTwo': 'Option 2',
+            'optionThree': 'Option 3',
+            'optionFour': 'Option 4',  
             'date': 'Date'        
         }
         help_texts = {

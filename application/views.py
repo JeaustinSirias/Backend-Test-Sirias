@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from .models import menu, lunch
 from .forms import menuForm, lunchForm
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime, localdate
+from .tasks import slack_advertisement
 #=======================================================
 def sudo_check(user):
     '''A method to checkout if an user 
@@ -44,6 +45,10 @@ def create_menu(request):
                     }
                 )  
             form.save()
+            if date == localdate():
+                item = menu.objects.filter(date=date)
+                UUID = item[0].uuid
+                slack_advertisement(UUID)
             note = 'A new menu has been created'
             return render(
                 request,
@@ -155,9 +160,9 @@ def list_menu(request):
     :return: the menu rendered HTML list
     '''    
     menu_dict = {}
-    for obj in menu.objects.all():
-        menu_dict[obj.pk] = {
-            'date': obj.date,
+    for item in menu.objects.all():
+        menu_dict[item.pk] = {
+            'date': item.date,
         }
     return render(
         request,
@@ -269,7 +274,7 @@ def check_details(request, id):
         }
     )
 #=======================================================
-def show_menu(request):
+def show_menu(request, uuid):
     '''The main view for employees
 
     '''
@@ -282,4 +287,6 @@ def show_menu(request):
             'lunch': Menu,
         }
     )
+#=======================================================
+#=======================================================
 #=======================================================

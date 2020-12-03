@@ -1,24 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import localdate
-from django.core.exceptions import ValidationError
+from .utils import validate_date, spawn_uuid
+from django.db.models.signals import post_save
+from .tasks import slack_advertisement
+from django.dispatch import receiver
 #=====================================================
-def validate_date(date):
-    if date < localdate():
-        raise ValidationError(
-            ('Wrong'), code='invalid'
-        )
-
 class menu(models.Model):
     '''The menu model with its respective
-    four meals entries'''
-    meal_one = models.CharField(max_length=255)
-    meal_two = models.CharField(max_length=255)
-    meal_three = models.CharField(max_length=255)
-    meal_four = models.CharField(max_length=255)
-    date = models.DateField(validators=[validate_date])
+    entries for luch options'''
 
+    optionOne = models.CharField(max_length=255)
+    optionTwo = models.CharField(max_length=255)
+    optionThree = models.CharField(max_length=255)
+    optionFour = models.CharField(max_length=255)
+    date = models.DateField(validators=[validate_date])
+    uuid = models.UUIDField(default=spawn_uuid, editable=False)
+#=====================================================
 class lunch(models.Model):
+    '''The lunch model'''
+
     MENU = [
         ('Option 1', 'Option 1'),
         ('Option 2', 'Option 2'),
@@ -29,7 +30,4 @@ class lunch(models.Model):
     option = models.CharField(max_length=255, choices=MENU)
     preference = models.CharField(max_length=40, blank=True, null=True)
     date = models.DateField(default=localdate, editable=False)
-
-
-
-
+#=====================================================

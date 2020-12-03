@@ -24,8 +24,8 @@ SECRET_KEY = 'n55-9x32o#k0!9h*i*hh+_sbgh16k-31ud!32(9ufsv(ilqz*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+LOGOUT_REDIRECT_URL = '/'
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'application.apps.ApplicationConfig',
     'widget_tweaks',
-]
+    'rest_framework'
+] 
+
+# Slack integration credentials
+VERIFICATION_TOKEN = '2c2JxbMlrlYiGzMdCkQAkV6k'
+OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1539105461334-2bfc7d6e11f554344da150bd4e7d6da1'
+BOT_USER_ACCESS_TOKEN = 'xoxb-1545797285314-1539105469254-qJIYccXaUMGvwZ4D0Jn9Ksjs'
+#CLIENT_ID = '1539379265012.1556346204785'
+#CLIENT_SECRET = '8ee6c63d56ea00f0d9e8b9f1227bfdd7'
+CHANNEL = '#slack-test'
+#URL = 'https://nora.cornershop.io/menu/'
+URL = 'http://localhost:8000/menu/'
+
+# Celery parameters
+#CELERY_BROKER_URL = 'django://'
+#CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+#CELERY_ACCEPT_CONTENT = ['application/json']
+#CELERY_TASK_SERIALIZER = 'json'
+#CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Santiago'
+CELERY_ENABLE_UTC = False
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
