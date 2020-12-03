@@ -21,7 +21,6 @@ urlpatterns = [
     path('', views.main_page, name='mainPage'),
     path('admin/', admin.site.urls),
     path('new-menu/', views.create_menu, name='newMenu'),
-    #path('main/', views.main_page, name='mainPage'),
     path('appoint-meal/', views.request_lunch, name='appointMeal'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('show-menu/', views.list_menu, name='list'),

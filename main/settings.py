@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,18 +40,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'application.apps.ApplicationConfig',
     'widget_tweaks',
-    'rest_framework'
 ] 
 
 # Slack integration credentials
 VERIFICATION_TOKEN = '2c2JxbMlrlYiGzMdCkQAkV6k'
-OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1542851509925-cb5a0196569670d00ad6b834a0b2aa6e'
+OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1553957223636-da3092e70ad2d956ec3f95ce2e965d15'
 BOT_USER_ACCESS_TOKEN = 'xoxb-1545797285314-1539105469254-w3w8MVFnk6WZUi1ZyS2qe4vd'
 CHANNEL = '#slack-test'
 URL = 'http://localhost:8000/menu/'
 
 # Celery parameters
 CELERY_TIMEZONE = 'America/Santiago'
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
 CELERY_ENABLE_UTC = False
 
 
