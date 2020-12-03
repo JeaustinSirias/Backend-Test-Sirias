@@ -10,10 +10,10 @@ class menu(models.Model):
     '''The menu model with its respective
     entries for luch options'''
 
-    optionOne = models.CharField(max_length=255)
-    optionTwo = models.CharField(max_length=255)
-    optionThree = models.CharField(max_length=255)
-    optionFour = models.CharField(max_length=255)
+    optionOne = models.CharField(max_length=40)
+    optionTwo = models.CharField(max_length=40)
+    optionThree = models.CharField(max_length=40)
+    optionFour = models.CharField(max_length=40)
     date = models.DateField(validators=[validate_date])
     uuid = models.UUIDField(default=spawn_uuid, editable=False)
 #=====================================================
