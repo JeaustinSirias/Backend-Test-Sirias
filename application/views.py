@@ -96,7 +96,7 @@ def request_lunch(request):
     :param request: the request object callout
     :return: the menu rendered HTML form
     '''
-    #Check if employee already requested once a day
+    # Call today's date as reference
     date = localdate()
 
     # Check if today's menu is available
