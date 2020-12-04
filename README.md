@@ -26,7 +26,7 @@ This project uses background tasks to operate **Slack channels integration**. In
 
 ## Before you continue
 ### About Docker use
-This project uses **Docker compose integration** to build a time saving container. It's highly recommended to build it this way, so you won't have to complain about your python and your libraries version. Make sure you have already installed **Docker** and **Docker compose** before keep ready this documentation. If not, you can get involved with it for a quick tutorial at:
+This project uses **Docker compose integration** to build a time saving container. It's highly recommended to build it this way, so you won't have to complain about your python and your libraries version. Make sure you have already installed **Docker** and **Docker compose** before keep reading this documentation. If not, you can get involved with it for a quick tutorial at:
 
 * [Install Docker service](https://docs.docker.com/get-docker/)
 * [Install Docker compose service](https://docs.docker.com/compose/install/)
@@ -36,11 +36,46 @@ This project uses **Docker compose integration** to build a time saving containe
 Start by cloning this repository to your computer by typing the next instruction in your command lines window:
 
 ```command
-git clone https://github.com/JeaustinSirias/Backend-Test-Sirias.git
+$ git clone https://github.com/JeaustinSirias/Backend-Test-Sirias.git
 ```
 Once this gets done move to the cloned repository path.
 
 ### Step 2: Setting up your Slack enviroment
+Slack service depends on the group of users where it is running and it requires authentication from the channel administrator, so to integrate this feature to your project you first need to set up your slack enviroment. You can read about how to install a Slack app [here](https://api.slack.com/apps). In case you already have your **Slack token** ([OAuth token](https://slack.com/intl/en-cr/help/articles/215770388-Create-and-regenerate-API-tokens)) with all granted [channel scope permissions](https://api.slack.com/scopes), then all you have to do is edit the [setup.py]() file inside the project directory with your credentials:
 
+```python
+OAUTH_TOKEN = '<your_token_here>'
+SLACK_CLANNEL = '#<your_channel_name>'
+```
+Once you've done this, then save changes and let's continue with the next steps!
 
+### Step 3: Running the project using Docker service
+Make sure you are in the project's root directory and by using your terminal again type the following makefile instruction to **build and run** the web Cornershop's Backend test:
 
+```command
+$ make docker
+```
+The image may take some minutes to get done as it downloads all its dependences. If everything went as expected you should be seeing now the HTTP direction of the devepment server as usual in Django projects as the next image shows:
+
+![bash_terminal](https://i.imgur.com/p4i1i0B.png)
+
+Then go to <http://0.0.0.0:8000/> to start navigating in the web project.
+
+### Step 4: Administration credentials
+So at this point the developmet server has you redirected to an authentication page. This is what Nora would actually see if she were the administrator. To login use the next superuser credentials:
+
+* **username**: nora
+* **password**: admin
+ 
+As you get it done so you will be in front of the main administrative page for Nora just like the next image:
+
+![web](https://i.imgur.com/4wfFlj6.png)
+
+Now you can start discovering the webpage features such as creating a menu for today and sending the Slack reminder to the channel you specified in the **Step 2**. If the project is currenty running OK and the Slack backgroun integration was successfully made, so you will be seeing something like this in in your Slack channel as you set up the today's menu:
+
+![bash_terminal](https://i.imgur.com/AKK1Gat.png)
+
+At this point if you want to interact as an employee (insted of Nora), so you can user the next common users (non admins) to request today's menu or something:
+
+* **username**: jose, **password**: jose12345
+* **username**: ana, **password**: ana12345
