@@ -79,7 +79,7 @@ As you get it done so you will be in front of the main administrative page for N
 
 ![web](https://i.imgur.com/4wfFlj6.png)
 
-Now you can start discovering the webpage features such as creating a menu for today and sending the Slack reminder to the channel you specified in the **Step 2**. If the project is currenty running OK and the Slack backgroun integration was successfully made, so you will be seeing something like this in in your Slack channel as you set up the today's menu:
+Now you can start discovering the webpage features such as creating a menu for today and sending the Slack reminder to the channel you specified in the **Step 2**. If the project is currenty running OK and the Slack background integration was successfully made, so you will be seeing something like this in your Slack channel as you set up the today's menu:
 
 ![bash_terminal](https://i.imgur.com/AKK1Gat.png)
 
