@@ -55,7 +55,7 @@ SLACK_CHANNEL = '#<your_channel_name>'
 # The hour limit for employees to request their menu
 HOUR = 11 # AM CLT
 ```
-Once you've done this, then save changes and let's continue with the next steps!
+You can also change the scheduled limit hour (`HOUR` parameter) for the employees request their today's menu option. Once you are done with this, then save changes and let's continue with the next steps!
 
 ### `Step 3:` Running the project using Docker service
 Make sure you are in the project's root directory and by using your terminal again type the following makefile instruction to **build and run** the web Cornershop's Backend test:
@@ -63,7 +63,7 @@ Make sure you are in the project's root directory and by using your terminal aga
 ```command
 $ make docker
 ```
-The image may take some minutes to get done as it downloads all its dependences. If everything went as expected you should be seeing now the HTTP direction of the devepment server as usual in Django projects as the next image shows:
+The image may take some minutes to get done as it downloads all its dependences. If everything went as expected you should be seeing now the HTTP direction of the devepment server as is usual in Django projects just the way the next image shows it:
 
 ![bash_terminal](https://i.imgur.com/p4i1i0B.png)
 
@@ -83,7 +83,7 @@ Now you can start discovering the webpage features such as creating a menu for t
 
 ![bash_terminal](https://i.imgur.com/AKK1Gat.png)
 
-At this point if you want to interact as an employee (insted of Nora), so you can use the next common users (non admins) to request today's menu or something:
+At this point if you want to interact with the page as an employee (instead of Nora), so you can use the next common users (non admins) to request today's menu or something by entering to the generated link in the **Slack reminder**:
 
 * **username**: jose, **password**: jose12345
 * **username**: ana, **password**: ana12345
