@@ -10,7 +10,7 @@ This project threats about a webpage to manage daily lunch menus for a comunity 
 
 
 ## Video
-You can find a full walkthrough video to see the project features.
+You can find a full walkthrough video to see the project features:
 
 [![Watch the video](https://i.imgur.com/wEHDbPs.png)](https://youtu.be/RND7s5csZW0)
 
@@ -106,7 +106,7 @@ And to run the Django project, as you usually know, from your local or virtual e
 ```command
 $ make run
 ```
-If you also want to run unittests this way, then use:
+If you also want to run **unittests** this way, then use:
 
 ```command
 $ make unittest
