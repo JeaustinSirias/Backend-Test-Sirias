@@ -19,7 +19,7 @@ from application import views
 
 urlpatterns = [
     path('', views.main_page, name='mainPage'),
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('new-menu/', views.create_menu, name='newMenu'),
     path('appoint-meal/', views.request_lunch, name='appointMeal'),
     path('accounts/', include('django.contrib.auth.urls')),
