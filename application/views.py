@@ -10,6 +10,7 @@ from django.utils.timezone import localtime, localdate
 from .tasks import slack_advertisement
 from .utils import sudo_check
 
+
 @login_required
 @user_passes_test(sudo_check)       
 def create_menu(request):
@@ -67,6 +68,7 @@ def create_menu(request):
             }
         )
 
+
 @login_required
 @user_passes_test(sudo_check)
 def main_page(request):
@@ -84,6 +86,7 @@ def main_page(request):
         }
     )
     
+
 @login_required
 def request_lunch(request):
     '''A view to let employees to order
