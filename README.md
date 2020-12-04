@@ -16,13 +16,13 @@ You can find a full walkthrough video to see the project features:
 
 ## Specifications
 
-This project uses background tasks to operate **Slack channels integration**. In consecuence this development is a sinergy of many microservices that help to create a final result:
+This project uses background tasks to operate **Slack channels integration**. In consecuence this development is a synergy of many microservices that help to create a final result:
 
-* [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html)
-* [RabbitMQ](https://www.rabbitmq.com/)
-* [Slack](https://slack.com/intl/en-cr/)
-* [Django](https://www.djangoproject.com/)
-* [Docker](https://www.docker.com/)
+* [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) for *async* tasks setup.
+* [RabbitMQ](https://www.rabbitmq.com/) to connect Django and Celery background tasks
+* [Slack](https://slack.com/intl/en-cr/) to notify reminders has been generated using Celery's scheduled tasks.
+* [Django](https://www.djangoproject.com/) to develop de web project.
+* [Docker](https://www.docker.com/) to make the project's distribution easier.
 
 ## Before you continue
 ### About Docker use
