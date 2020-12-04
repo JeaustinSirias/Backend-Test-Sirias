@@ -1,6 +1,6 @@
 # Cornershop's Backend Test solution
 
-Hi there! In this repository you will find my implementation for the [Cornershop's Backend Test](https://github.com/JeaustinSirias/Backend-Test-Sirias/blob/main/docs/enunciated.md). 
+Hi there! In this repository you will find my implementation for the [Cornershop's Backend Test](https://github.com/JeaustinSirias/Backend-Test-Sirias/blob/main/docs/enunciated.md), using the Django framework.
 
 ![user_interfase](https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1457824623/x0qk4ds6je7usxll6vhk.png)
 
