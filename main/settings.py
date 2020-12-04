@@ -11,6 +11,22 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+# Application Params
+LIMIT_HOUR = 11 # The limit hour to request the lunch
+
+# Slack integration credentials
+OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1561628659857-415ed57bc79301eea0adc4673fcb922e'
+CHANNEL = '#slack-test'
+URL = 'http://localhost:8000/menu/'
+
+# Celery parameters
+CELERY_TIMEZONE = 'America/Santiago'
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
+CELERY_ENABLE_UTC = False
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,8 +40,8 @@ SECRET_KEY = 'n55-9x32o#k0!9h*i*hh+_sbgh16k-31ud!32(9ufsv(ilqz*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+LOGOUT_REDIRECT_URL = '/'
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    'application.apps.ApplicationConfig',
+    'widget_tweaks',
+] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +98,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -105,7 +122,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
+#'America/Santiago'
 
 USE_I18N = True
 
