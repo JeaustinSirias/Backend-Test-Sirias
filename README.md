@@ -50,7 +50,7 @@ Slack service depends on the group of users where it is running and it requires 
 OAUTH_TOKEN = '<your_token_here>' 
 
 # The Slack channel name
-SLACK_CHANNEL = '##<your_channel_name>'
+SLACK_CHANNEL = '#<your_channel_name>'
 
 # The hour limit for employees to request their menu
 HOUR = 11 # AM CLT
