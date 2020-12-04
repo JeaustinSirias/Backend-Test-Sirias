@@ -95,7 +95,7 @@ The project counts with a list of unitary tests to make sure that its `views`, `
 $ make dockerUnittest
 ```
 
-## Just in case definitely you do not want to user Docker service
+## Just in case definitely you do not want to use Docker services
 If you do not want (or can) use the Docker services, then you can also build a virtual enviroment [venv](https://docs.python.org/3/tutorial/venv.html) (python 3.7+) as traditionally is made. **Make sure you are in the cloned project root directory**. In any case you will have to install the project's [dependences](https://github.com/JeaustinSirias/Backend-Test-Sirias/blob/main/requirements.txt) by using the next command:
 
 ```command
