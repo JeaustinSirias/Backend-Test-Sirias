@@ -6,7 +6,7 @@ class menuForm(forms.ModelForm):
     class Meta:
         model = menu
         fields = '__all__'
-        exlude = {'uuid'}
+        exclude = {'uuid'}
         labels = {
             'optionOne': 'Option 1',
             'optionTwo': 'Option 2',

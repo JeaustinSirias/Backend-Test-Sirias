@@ -7,19 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime, localdate
 from .tasks import slack_advertisement
+from .utils import sudo_check
 #=======================================================
-def sudo_check(user):
-    '''A method to checkout if an user 
-    has 'superuser' privileges
-
-    :param user: the current authenticated user
-    :return: boolean
-    '''
-    if user.is_active and user.is_superuser:
-        return True
-    else:
-        return False
- #=======================================================
 @login_required
 @user_passes_test(sudo_check)       
 def create_menu(request):
@@ -290,6 +279,4 @@ def show_menu(request, uuid):
             'lunch': Menu,
         }
     )
-#=======================================================
-#=======================================================
 #=======================================================
