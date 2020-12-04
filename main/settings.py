@@ -11,14 +11,15 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from .setup import HOUR, SLACK_CHANNEL, OAUTH_TOKEN
 import os
 
 # Application Params
-LIMIT_HOUR = 11 # The limit hour to request the lunch
+LIMIT_HOUR = HOUR # The limit hour to request the lunch
 
 # Slack integration credentials
-OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1561628659857-415ed57bc79301eea0adc4673fcb922e'
-CHANNEL = '#slack-test'
+OAUTH_ACCESS_TOKEN = OAUTH_TOKEN
+CHANNEL = SLACK_CHANNEL
 URL = 'http://localhost:8000/menu/'
 
 # Celery parameters
