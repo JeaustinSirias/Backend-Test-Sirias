@@ -44,8 +44,16 @@ Once this gets done move to the cloned repository path.
 Slack service depends on the group of users where it is running and it requires authentication from the channel administrator, so to integrate this feature to your project you first need to set up your slack enviroment. You can read about how to install a Slack app [here](https://api.slack.com/apps). In case you already have your **Slack token** ([OAuth token](https://slack.com/intl/en-cr/help/articles/215770388-Create-and-regenerate-API-tokens)) with all granted [channel scope permissions](https://api.slack.com/scopes), then all you have to do is edit the [setup.py]() file inside the project directory with your credentials:
 
 ```python
-OAUTH_TOKEN = '<your_token_here>'
-SLACK_CLANNEL = '#<your_channel_name>'
+'''Modifiable parameters of the project'''
+
+# The Slack app token
+OAUTH_TOKEN = '<your_token_here>' 
+
+# The Slack channel name
+SLACK_CHANNEL = '##<your_channel_name>'
+
+# The hour limit for employees to request their menu
+HOUR = 11 # AM CLT
 ```
 Once you've done this, then save changes and let's continue with the next steps!
 
