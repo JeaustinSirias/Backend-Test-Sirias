@@ -5,6 +5,7 @@ from django.utils.timezone import localdate
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
+
 # Create your tests here.
 class testMenuModel(TestCase):
     '''A class to test the menu model'''
@@ -67,6 +68,7 @@ class testMenuModel(TestCase):
             date = '2020-12-20'        
         )
         self.assertRaises(ValidationError, Menu.full_clean)
+
 
 class testLunchModel(TestCase):
     '''A class to test the lunch model'''

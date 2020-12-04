@@ -4,6 +4,7 @@ from celery import shared_task
 from slack import WebClient
 from .utils import spawn_uuid
 
+
 @shared_task
 def slack_advertisement(uuid_key):
     '''A function that notifies

@@ -1,6 +1,7 @@
 from django import forms
 from .models import menu, lunch
-#=====================================================
+
+
 class menuForm(forms.ModelForm):
     '''The form for the menu model'''
     class Meta:
@@ -17,7 +18,8 @@ class menuForm(forms.ModelForm):
         help_texts = {
             'date': 'Format YYYY-MM-DD',
         }
-#=====================================================
+
+
 class lunchForm(forms.ModelForm):
     '''The form for employees to fill their 
     preferred day's meal'''
@@ -30,4 +32,3 @@ class lunchForm(forms.ModelForm):
             'option': 'Choose your preferred meal',
             'preference': 'Any custom preference?',
         }
-#=====================================================

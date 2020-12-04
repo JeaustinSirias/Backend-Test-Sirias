@@ -5,7 +5,8 @@ from .utils import validate_date, spawn_uuid
 from django.db.models.signals import post_save
 from .tasks import slack_advertisement
 from django.dispatch import receiver
-#=====================================================
+
+
 class menu(models.Model):
     '''The menu model with its respective
     entries for luch options'''
@@ -16,7 +17,8 @@ class menu(models.Model):
     optionFour = models.CharField(max_length=40)
     date = models.DateField(validators=[validate_date])
     uuid = models.UUIDField(default=spawn_uuid, editable=False)
-#=====================================================
+
+
 class lunch(models.Model):
     '''The lunch model for employees'''
 

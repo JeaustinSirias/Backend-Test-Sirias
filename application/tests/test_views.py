@@ -7,6 +7,7 @@ from django.urls import reverse
 from application.tasks import slack_advertisement
 from django.utils.timezone import localdate
 
+
 # Create your tests here.
 class testCreateMenuView(TestCase):
     '''A class to test create_menu view'''
@@ -70,6 +71,7 @@ class testCreateMenuView(TestCase):
         response = self.client.get('/new-menu/')
         self.assertTrue(response, 'templates/createMenu.html')
 
+
 class testMainPageView(TestCase):
     '''A class to test the nora's main page'''
 
@@ -109,6 +111,7 @@ class testMainPageView(TestCase):
         )
         response = self.client.get(reverse(views.main_page))
         self.assertEqual(response.status_code, 302)
+
 
 class testEditMenuView(TestCase):
     '''A class to test the main admin page view'''

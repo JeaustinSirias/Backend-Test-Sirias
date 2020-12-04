@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.utils.timezone import localtime, localdate
 from .tasks import slack_advertisement
 from .utils import sudo_check
-#=======================================================
+
 @login_required
 @user_passes_test(sudo_check)       
 def create_menu(request):
@@ -64,10 +64,9 @@ def create_menu(request):
             'createMenu.html', 
             {
                 'menuform' : new_form,
-                #'note': ''
             }
         )
-#=======================================================
+
 @login_required
 @user_passes_test(sudo_check)
 def main_page(request):
@@ -84,7 +83,7 @@ def main_page(request):
             'date': date,
         }
     )
-#=======================================================
+    
 @login_required
 def request_lunch(request):
     '''A view to let employees to order
@@ -146,7 +145,8 @@ def request_lunch(request):
             'note': note,     
         }
     )
-#=======================================================
+
+
 @login_required
 @user_passes_test(sudo_check)
 def list_menu(request):
@@ -168,7 +168,8 @@ def list_menu(request):
             'menu_list': menu_dict,
         }
     )
-#=======================================================
+
+
 @login_required
 @user_passes_test(sudo_check)
 def edit_menu(request, id):
@@ -214,7 +215,8 @@ def edit_menu(request, id):
             'note': note,
         }
     )
-#=======================================================
+
+
 def delete_menu(request, id):
     '''A method for superusers to delete their
     linked menus in case they won't 
@@ -227,7 +229,8 @@ def delete_menu(request, id):
     form = menu.objects.get(id=id)
     form.delete()
     return redirect(to='list')
-#=======================================================
+
+
 @login_required
 @user_passes_test(sudo_check)
 def list_requests(request):
@@ -252,7 +255,8 @@ def list_requests(request):
            'date': instant,
         }
     )
-#=======================================================
+
+
 def check_details(request, id):
     '''A view dedicated to show the details
     of the requested lunch for a specific employee.
@@ -270,7 +274,8 @@ def check_details(request, id):
             'pk': id,
         }
     )
-#=======================================================
+
+
 def show_menu(request, uuid):
     '''The main view for employees
 
@@ -287,4 +292,4 @@ def show_menu(request, uuid):
             'lunch': Menu,
         }
     )
-#=======================================================
+

@@ -4,6 +4,7 @@ from  application.models import menu, lunch
 from django.utils.timezone import localdate
 from django.contrib.auth.models import User
 
+
 # Create your tests here.
 class testMenuForm(TestCase):
     '''A class to test the menu form'''
@@ -54,6 +55,7 @@ class testMenuForm(TestCase):
         }
         form = menuForm(data=data)
         self.assertFalse(form.is_valid())
+
 
 class testLunchForm(TestCase):
     '''A class to test the lunch form'''
