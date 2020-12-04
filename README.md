@@ -41,7 +41,7 @@ $ git clone https://github.com/JeaustinSirias/Backend-Test-Sirias.git
 Once this gets done move to the cloned repository path.
 
 ### `Step 2:` Setting up your Slack enviroment
-Slack service depends on the group of users where it is running and it requires authentication from the channel administrator, so to integrate this feature to your project you first need to set up your slack enviroment. You can read about how to install a Slack app [here](https://api.slack.com/apps). In case you already have your **Slack token** ([OAuth token](https://slack.com/intl/en-cr/help/articles/215770388-Create-and-regenerate-API-tokens)) with all granted [channel scope permissions](https://api.slack.com/scopes), then all you have to do is edit the [setup.py]() file inside the project directory with your credentials:
+Slack service depends on the group of users where it is running and it requires authentication from the channel administrator, so to integrate this feature to your project you first need to set up your slack enviroment. You can read about how to install a Slack app [here](https://api.slack.com/apps). In case you already have your **Slack token** ([OAuth token](https://slack.com/intl/en-cr/help/articles/215770388-Create-and-regenerate-API-tokens)) with all granted [channel scope permissions](https://api.slack.com/scopes), then all you have to do is edit the [setup.py](https://github.com/JeaustinSirias/Backend-Test-Sirias/blob/main/main/setup.py) file inside the project directory with your credentials:
 
 ```python
 '''Modifiable parameters of the project'''
