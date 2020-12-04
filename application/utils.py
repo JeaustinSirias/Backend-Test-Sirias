@@ -1,4 +1,4 @@
-'''Helper funtions along the project'''
+'''Helper functions along the project'''
 import uuid
 from django.utils.timezone import localdate
 from django.core.exceptions import ValidationError
