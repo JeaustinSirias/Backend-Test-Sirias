@@ -26,7 +26,7 @@ This project uses background tasks to operate **Slack channels integration**. In
 
 ## Before you continue
 ### About Docker use
-This project uses **Docker compose integration** to build a time saving container. It's highly recommended to build it this way, so you won't have to complain about your python and your libraries version. Make sure you have already installed **Docker** and **Docker compose** before keep reading this documentation. If not, you can get involved with it for a quick tutorial at:
+This project uses **Docker compose integration** to build a time saving container. It is highl already have installed **Docker** and **Docker compose** services in your computer before keep reading this documentation. If not, you can get involved with a quick tutorial at:
 
 * [Install Docker service](https://docs.docker.com/get-docker/)
 * [Install Docker compose service](https://docs.docker.com/compose/install/)
