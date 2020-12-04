@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.utils.timezone import localdate
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from django.utils.timezone import localdate
 
 # Create your tests here.
 class testMenuModel(TestCase):

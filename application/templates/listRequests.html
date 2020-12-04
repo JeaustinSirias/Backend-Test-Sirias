@@ -15,11 +15,11 @@
 
 <div class="container">
     <h1>
-        List of luch requests for today {{date}}
+        List of lunch requests for today {{date}}
     </h1>
         {% for pk, item in requests_list.items %}
         <h3>
-            There is a request for menu's {{item.option}} from employee: {{user}}
+            There is a request for menu's {{item.option}}
             <a href="{% url 'details' pk %}">See details</a>
         </h3>
         {% endfor %}

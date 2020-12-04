@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import menu, lunch
 from .forms import menuForm, lunchForm
+from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -97,17 +98,24 @@ def request_lunch(request):
     '''
     #Check if employee already requested once a day
     date = localdate()
-    if lunch.objects.filter(user=request.user, date=date).exists():
-        return render(
-            request,
-            'requestMenu.html',
-            {
-                'note': 'We\'re preparing your meal!'
-            }
-        )
+
     # Check if today's menu is available
     item = menu.objects.filter(date=date)
-    if item.exists() and localtime().hour < 22:
+    if item.exists() and localtime().hour < settings.LIMIT_HOUR:
+        
+         #Check if employee already requested once a day
+        instance = lunch.objects.filter(
+            user=request.user,
+            date=date,
+        )
+        if instance.exists():
+            return render(
+                request,
+                'requestMenu.html',
+                {
+                    'note': 'We\'re preparing your meal!'
+                }
+            )
         user = lunch(user=request.user)
         new_form = lunchForm()
         if request.method == 'POST':

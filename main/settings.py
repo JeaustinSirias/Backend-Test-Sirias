@@ -13,6 +13,21 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+# Application Params
+LIMIT_HOUR = 11 # The limit hour to request the lunch
+
+# Slack integration credentials
+OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1561628659857-415ed57bc79301eea0adc4673fcb922e'
+CHANNEL = '#slack-test'
+URL = 'http://localhost:8000/menu/'
+
+# Celery parameters
+CELERY_TIMEZONE = 'America/Santiago'
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
+CELERY_ENABLE_UTC = False
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,20 +56,6 @@ INSTALLED_APPS = [
     'application.apps.ApplicationConfig',
     'widget_tweaks',
 ] 
-
-# Slack integration credentials
-VERIFICATION_TOKEN = '2c2JxbMlrlYiGzMdCkQAkV6k'
-OAUTH_ACCESS_TOKEN = 'xoxp-1545797285314-1569639480336-1553957223636-da3092e70ad2d956ec3f95ce2e965d15'
-BOT_USER_ACCESS_TOKEN = 'xoxb-1545797285314-1539105469254-w3w8MVFnk6WZUi1ZyS2qe4vd'
-CHANNEL = '#slack-test'
-URL = 'http://localhost:8000/menu/'
-
-# Celery parameters
-CELERY_TIMEZONE = 'America/Santiago'
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_BROKER', 'pyamqp://guest@localhost//')
-CELERY_ENABLE_UTC = False
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -97,7 +98,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -123,6 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/Santiago'
+#'America/Santiago'
 
 USE_I18N = True
 

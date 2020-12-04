@@ -32,6 +32,12 @@ services:
     # RabbitMQ service port
     rabbitmq:
         image: "rabbitmq:3.7-alpine"
-
+    
+    # Project unittest
+    testing:
+        build: .
+        container_name: Backend-Test-Sirias-unittest
+        volumes:
+            - .:/usr/src/app/
 
 

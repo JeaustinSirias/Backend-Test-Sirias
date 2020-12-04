@@ -1,7 +1,7 @@
 #############################################################
 #							                                #
 #                 Cornershop's Backend Test 		        #
-#	   Jeaustin Sirias Chacón (jeaustin.sirias@gmail.com) 	#	    #
+#	   Jeaustin Sirias Chacón (jeaustin.sirias@gmail.com) 	#	    
 #                     Copyright (C) 2020		            #
 #							                                #
 #############################################################
@@ -11,14 +11,18 @@ TEST = ./test/
 SOURCE = ./source/
 
 # COMMANDS
+
+docker:
+	docker-compose build \
+	&& docker-compose up
+
+unittest:
+	docker-compose build \
+	&& docker-compose run --service-ports testing python3 manage.py test 
+
 require: # Install requirements
 	pip install -r requirements.txt
 
 run: # Run project
 	python3 manage.py runserver
-
-container: #creates a docker images and runs a container
-	sudo docker build --tag proyecto_2 . \
-	&& sudo docker run -p 8080:80 proyecto_2
-
 
