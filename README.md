@@ -19,9 +19,9 @@ You can find a full walkthrough video to see the project features:
 This project uses background tasks to operate **Slack channels integration**. In consecuence this development is a synergy of many microservices that help to create a final result:
 
 * [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) for *async* tasks setup.
-* [RabbitMQ](https://www.rabbitmq.com/) to connect Django and Celery background tasks
-* [Slack](https://slack.com/intl/en-cr/) to notify reminders has been generated using Celery's scheduled tasks.
-* [Django](https://www.djangoproject.com/) to develop de web project.
+* [RabbitMQ](https://www.rabbitmq.com/) to connect Django and Celery's background tasks
+* [Slack](https://slack.com/intl/en-cr/) to notify reminders if today's menu is available according to Celery's scheduled workflow.
+* [Django](https://www.djangoproject.com/) to develop the web project.
 * [Docker](https://www.docker.com/) to make the project's distribution easier.
 
 ## Before you continue
