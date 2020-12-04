@@ -96,17 +96,17 @@ $ make dockerUnittest
 ```
 
 ## Just in case definitely you do not want to user Docker service
-If you do not want (or can) use the Docker services, then you can also build a virtual enviroment [venv](https://docs.python.org/3/tutorial/venv.html) (python 3.7+) as traditionally is made. In any case you will have to install the project's dependences by using the next command:
+If you do not want (or can) use the Docker services, then you can also build a virtual enviroment [venv](https://docs.python.org/3/tutorial/venv.html) (python 3.7+) as traditionally is made. **Make sure you are in the cloned project root directory**. In any case you will have to install the project's dependences by using the next command:
 
 ```command
 $ make requirements
 ```
-And to run the project from local or virtual enviroment type:
+And to run the Django project, as you usually know, from your local or virtual enviroment, type:
 
 ```command
 $ make run
 ```
-If also want to run unittests this way, then use:
+If you also want to run unittests this way, then use:
 
 ```command
 $ make unittest
