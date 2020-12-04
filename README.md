@@ -75,7 +75,7 @@ Now you can start discovering the webpage features such as creating a menu for t
 
 ![bash_terminal](https://i.imgur.com/AKK1Gat.png)
 
-At this point if you want to interact as an employee (insted of Nora), so you can user the next common users (non admins) to request today's menu or something:
+At this point if you want to interact as an employee (insted of Nora), so you can use the next common users (non admins) to request today's menu or something:
 
 * **username**: jose, **password**: jose12345
 * **username**: ana, **password**: ana12345
